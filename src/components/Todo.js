@@ -1,12 +1,18 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-const Todo = ({ todo, removeTodo }) => {
-    const [done, setDone] = useState(false);
+const Todo = ({ todo, removeTodo, changeChecked }) => {
+    // const [done, setDone] = useState(false);
+
+    const onClick = (e) => {
+        if (e.target.tagName === "LI") {
+            changeChecked(todo);
+        }
+    };
     
     return (
-        <li onClick={() => setDone(!done)} className={done ? "checked" : ""}>
-            {todo}
+        <li onClick={onClick} className={todo.checked ? "checked" : ""}>
+            {todo.name}
             <span
             className="close"
             onClick={() => removeTodo(todo)}
@@ -18,8 +24,9 @@ const Todo = ({ todo, removeTodo }) => {
 };
 
 Todo.propTypes = {
-    todo: PropTypes.string.isRequired,
-    removeTodo: PropTypes.func.isRequired
+    todo: PropTypes.object.isRequired,
+    removeTodo: PropTypes.func.isRequired,
+    changeChecked: PropTypes.func.isRequired
 };
 
 export default Todo;
