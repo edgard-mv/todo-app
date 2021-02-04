@@ -38,10 +38,13 @@ function App() {
         return;
     }
 
-    setTodos([...todos, {
-      name: title,
-      checked: false
-    }]);
+    setTodos([
+      {
+        name: title,
+        checked: false
+      },
+      ...todos
+    ]);
   };
 
   const removeTodo = (target) => {
